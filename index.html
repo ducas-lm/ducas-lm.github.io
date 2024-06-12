@@ -6,7 +6,7 @@
     <title>Dia dos Namorados</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
         body {
             margin: 0;
             padding: 0;
@@ -97,7 +97,44 @@
         #love-message {
             font-size: 3em;
             z-index: 10;
+            text-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
         }
+
+        .roses {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            z-index: 5;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .roses img {
+            width: 50%; /* Ajuste o tamanho conforme necessário */
+            height: auto;
+            transform: scaleX(-1); /* Espelha horizontalmente */
+        }
+
+        .roses::before, .roses::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            background: url('roses-bg.png') no-repeat center;
+            background-size: contain;
+        }
+
+        .roses::before {
+            left: 0;
+        }
+
+        .roses::after {
+            right: 0;
+            transform: scaleX(-1); /* Espelha horizontalmente */
+        }
+
+
     </style>
 </head>
 <body>
@@ -106,12 +143,34 @@
     </div>
     <div id="main-content">
         <div id="hearts-container">
-            <div class="heart" style="top: 20%; left: 20%; background-image: url('heart.webp');"></div>
+            <div class="heart" style="top: 20%; left: 20%; background-image: url('heart.png');"></div>
             <div class="heart" style="top: 10%; left: 60%; background-image: url('img1.png');"></div>
-            <div class="heart" style="top: 40%; left: 50%; background-image: url('heart.webp');"></div>
+            <div class="heart" style="top: 40%; left: 50%; background-image: url('heart.png');"></div>
             <div class="heart" style="top: 0%; left: 3%; background-image: url('img2.png');"></div>
-            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.webp');"></div>
-            <div class="heart" style="top: 8%; left: 90%; background-image: url('img3.webp');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img3.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img4.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img5.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img6.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img7.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img8.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img9.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img10.png');"></div>
+            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img11.png');"></div>
+            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img12.png');"></div>
+            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img13.png');"></div>
+            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img14.png');"></div>
+            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img15.png');"></div>
+            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.png');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img16.png');"></div>
+            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.png');"></div>
+        </div>
+        <div class="roses"> 
+            <img src="roses-bg.png">
         </div>
         <h1 id="love-message">EU TE AMO</h1>
     </div>
@@ -125,6 +184,7 @@
             // Defina o volume para 0.5 (metade do volume total)
             backgroundMusic.volume = 0.01;
             changeFont();
+            randomizeHeartPositions();
         });
 
         function changeFont() {
@@ -137,6 +197,21 @@
                 currentIndex = (currentIndex + 1) % fonts.length;
             }, 200);
         }
+
+        function getRandomPercentage() {
+            return Math.floor(Math.random() * 101) + '%';
+        }
+
+        function randomizeHeartPositions() {
+            document.querySelectorAll('.heart').forEach(div => {
+                div.style.top = getRandomPercentage();
+                div.style.left = getRandomPercentage();
+            });
+        }
+
+        document.querySelectorAll('.heart').forEach(div => {
+            div.addEventListener('animationiteration', randomizeHeartPositions);
+        });
     </script>
 </body>
 </html>
