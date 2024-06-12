@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia dos Namorados</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Aplicando Arial inicialmente */
+            background-color: white;
+            text-align: center;
+        }
+
+        #start-screen {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        #start-button {
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background-color: red;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        #start-button:hover {
+            padding: 18px 33px;
+            font-size: 22.5px;
+            border-radius: 13px;
+            background-color: rgb(255, 55, 55);
+        }
+
+        #start-button:active {
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background-color: red;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        #main-content {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+            display: none; /* Inicialmente oculto */
+        }
+
+        #hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            animation: float 10s infinite;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        @keyframes float {
+            0% {
+                transform: scale(0.5) translateY(100vh);
+            }
+            50% {
+                transform: scale(1) translateY(50vh);
+            }
+            100% {
+                transform: scale(0.5) translateY(0);
+            }
+        }
+
+        #love-message {
+            font-size: 3em;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div id="start-screen">
+        <button id="start-button">Clique para começar</button>
+    </div>
+    <div id="main-content">
+        <div id="hearts-container">
+            <div class="heart" style="top: 20%; left: 20%; background-image: url('heart.webp');"></div>
+            <div class="heart" style="top: 10%; left: 60%; background-image: url('img1.png');"></div>
+            <div class="heart" style="top: 40%; left: 50%; background-image: url('heart.webp');"></div>
+            <div class="heart" style="top: 0%; left: 3%; background-image: url('img2.png');"></div>
+            <div class="heart" style="top: 60%; left: 80%; background-image: url('heart.webp');"></div>
+            <div class="heart" style="top: 8%; left: 90%; background-image: url('img3.webp');"></div>
+        </div>
+        <h1 id="love-message">EU TE AMO</h1>
+    </div>
+    <audio id="background-music" src="audio.mp3" preload="auto" loop></audio>
+    <script>
+        document.getElementById('start-button').addEventListener('click', function() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+            var backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.play();
+            // Defina o volume para 0.5 (metade do volume total)
+            backgroundMusic.volume = 0.01;
+            changeFont();
+        });
+
+        function changeFont() {
+            var fonts = ['Arial', 'Times New Roman', 'Open Sans', 'Kanit', 'Lora'];
+            var loveMessage = document.getElementById('love-message');
+            var currentIndex = 0;
+
+            setInterval(function() {
+                loveMessage.style.fontFamily = fonts[currentIndex];
+                currentIndex = (currentIndex + 1) % fonts.length;
+            }, 200);
+        }
+    </script>
+</body>
+</html>
